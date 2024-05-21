@@ -61,10 +61,17 @@ curl -L "${download_url}" -o "scriptware-update.zip"
 
 print_color "32" "Updating SW-M..."
 
-rm -rf "/Applications/Script Ware M (revived edition).app"
-unzip -qq "scriptware-update.zip"
+DIR="/Applications/Script Ware M (revived edition).app"
+if [ -d "$DIR" ]; then
+  rm -rf "$DIR"
+  print_color "32" "Removed old SW-M version."
+else
+  print_color "32" "Welcome new user!"
+fi
 
+unzip -qq "scriptware-update.zip"
 rm "scriptware-update.zip"
+
 rm ./jq
 
 print_color "32" "SW-M updated!"
